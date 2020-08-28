@@ -9,8 +9,9 @@
 
 \TLV
    |calc
-      @1 
+      @0
          $reset = *reset;
+      @1 
          $valid = $reset ? 0 : >>1$valid+1;
          $valid_or_reset = $valid || $reset;  
       ?$valid   
