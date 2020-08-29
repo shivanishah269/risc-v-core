@@ -45,6 +45,12 @@
          // Next PC
          $pc[31:0] = (>>1$reset) ? '0 : >>1$pc + 32'd4;
          
+         $imem_rd_en = !>>1$reset ? 1 : 0;
+         $imem_rd_addr[31:0] = $pc[M4_IMEM_INDEX_CNT+1:2];
+         
+      @1         
+         $instr[31:0] = $imem_rd_data[31:0];
+         
          
       // Note: Because of the magic we are using for visualisation, if visualisation is enabled below,
       //       be sure to avoid having unassigned signals (which you might be using for random inputs)
