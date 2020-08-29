@@ -99,11 +99,12 @@
          $is_addi = $dec_bits ==? 11'bx_000_0010011;
          
       // Register File Read
-         ?$rs1_valid
-            $rf_rd_en1 = $rs1_valid;
+         $rf_rd_en1 = $rs1_valid;
+         ?$rf_rd_en1
             $rf_rd_index1[4:0] = $rs1[4:0];
-         ?$rs2_valid
-            $rf_rd_en2 = $rs2_valid;
+         
+         $rf_rd_en2 = $rs2_valid;
+         ?$rf_rd_en2
             $rf_rd_index2[4:0] = $rs2[4:0];
          
          $src1_value[31:0] = $rf_rd_data1[31:0];
@@ -112,7 +113,13 @@
       // ALU
          $result[31:0] = $is_addi ? $src1_value + $imm :
                          $is_add ? $src1_value + $src2_value : 32'bx;
-         
+      // Register File Write
+         $rf_wr_en = ($rd == 5'b0) ? 1'b0 : $rd_valid;
+         ?$rf_wr_en   
+            $rf_wr_index[4:0] = $rd[4:0];
+      
+         $rf_wr_data[31:0] = $result[31:0];
+      
       // Note: Because of the magic we are using for visualisation, if visualisation is enabled below,
       //       be sure to avoid having unassigned signals (which you might be using for random inputs)
       //       other than those specifically expected in the labs. You'll get strange errors for these.
