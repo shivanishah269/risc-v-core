@@ -55,16 +55,11 @@
          $is_i_instr = $instr[6:2] ==? 5'b0000x ||
                        $instr[6:2] ==? 5'b001x0 ||
                        $instr[6:2] == 5'b11001;
-         
          $is_r_instr = $instr[6:2] ==? 5'b01x1x ||
-                       $instr[6:2] ==? 5'bxx100;
-                       
-         $is_b_instr = $instr[6:2] == 5'b11000;
- 
-         $is_u_instr = $instr[6:2] == 5'b0x101;
-         
-         $is_s_instr = $instr[6:2] == 5'b0100x;
-         
+                       $instr[6:2] ==? 5'bxx100;                       
+         $is_b_instr = $instr[6:2] == 5'b11000; 
+         $is_u_instr = $instr[6:2] == 5'b0x101;         
+         $is_s_instr = $instr[6:2] == 5'b0100x;        
          $is_j_instr = $instr[6:2] == 5'b11011;
          
          $imm[31:0] = $is_i_instr ? { {21{$instr[31]}} , $instr[30:20] } :
@@ -93,12 +88,15 @@
          $opcode[6:0] = $instr[6:0];
          
          $dec_bits[10:0] = {$funct7[5],$funct3,$opcode};
+         
          $is_beq = $dec_bits ==? 11'bx_000_1100011;
          $is_bne = $dec_bits ==? 11'bx_001_1100011;
          $is_blt = $dec_bits ==? 11'bx_100_1100011;
          $is_bge = $dec_bits ==? 11'bx_101_1100011;
          $is_bltu = $dec_bits ==? 11'bx_110_1100011;
          $is_bgeu = $dec_bits ==? 11'bx_111_1100011;
+         $is_add = $dec_bits ==? 11'b0_000_0110011;
+         $is_addi = $dec_bits ==? 11'bx_000_0010011;
          
       // Register File Read
          ?$rs1_valid
@@ -110,6 +108,10 @@
          
          $src1_value[31:0] = $rf_rd_data1[31:0];
          $src2_value[31:0] = $rf_rd_data2[31:0];
+         
+      // ALU
+         $result[31:0] = $is_addi ? $src1_value + $imm :
+                         $is_add ? $src1_value + $src2_value : 32'bx;
          
       // Note: Because of the magic we are using for visualisation, if visualisation is enabled below,
       //       be sure to avoid having unassigned signals (which you might be using for random inputs)
