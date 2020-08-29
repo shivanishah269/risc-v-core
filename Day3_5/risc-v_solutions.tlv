@@ -51,7 +51,7 @@
       @1         
          $instr[31:0] = $imem_rd_data[31:0];
          
-      // decode   
+      // Decode   
          $is_i_instr = $instr[6:2] ==? 5'b0000x ||
                        $instr[6:2] ==? 5'b001x0 ||
                        $instr[6:2] == 5'b11001;
@@ -100,7 +100,14 @@
          $is_bltu = $dec_bits ==? 11'bx_110_1100011;
          $is_bgeu = $dec_bits ==? 11'bx_111_1100011;
          
-         
+      // Register File Read
+         ?$rs1_valid
+            $rf_rd_en1 = $rs1_valid;
+            $rf_rd_index1[4:0] = $rs1[4:0];
+         ?$rs2_valid
+            $rf_rd_en2 = $rs2_valid;
+            $rf_rd_index2[4:0] = $rs2[4:0];
+                     
       // Note: Because of the magic we are using for visualisation, if visualisation is enabled below,
       //       be sure to avoid having unassigned signals (which you might be using for random inputs)
       //       other than those specifically expected in the labs. You'll get strange errors for these.
@@ -117,7 +124,7 @@
    //  o CPU visualization
    |cpu
       m4+imem(@1)    // Args: (read stage)
-      //m4+rf(@1, @1)  // Args: (read stage, write stage) - if equal, no register bypass is required
+      m4+rf(@1, @1)  // Args: (read stage, write stage) - if equal, no register bypass is required
       //m4+dmem(@4)    // Args: (read/write stage)
    
    m4+cpu_viz(@4)    // For visualisation, argument should be at least equal to the last stage of CPU logic
