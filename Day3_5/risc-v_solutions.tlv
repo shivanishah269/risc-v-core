@@ -44,7 +44,8 @@
       //Fetch
          // Next PC
          $pc[31:0] = (>>1$reset) ? '0 : 
-                     (>>3$taken_br) ? >>3$br_tgt_pc : >>1$inc_pc;
+                     (>>3$taken_br) ? >>3$br_tgt_pc : 
+                     (>>3$is_load) ? >>3$inc_pc : >>1$inc_pc;
          
          $imem_rd_en = !$reset;
          $imem_rd_addr[31:0] = $pc[M4_IMEM_INDEX_CNT+1:2];
@@ -197,7 +198,10 @@
                      $is_bgeu ? ($src1_value >= $src2_value) : 1'b0;
                      
          $valid_taken_br = $valid && $taken_br;
-         $valid = !(>>1$valid_taken_br || >>2$valid_taken_br);
+         
+      // Load
+         $valid_load = $valid && $is_load;
+         $valid = !(>>1$valid_taken_br || >>2$valid_taken_br || >>1$valid_load || >>2$valid_load);
          
          
          
