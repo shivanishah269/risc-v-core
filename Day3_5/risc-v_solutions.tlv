@@ -47,7 +47,9 @@
          // Next PC
          $pc[31:0] = (>>1$reset) ? '0 : 
                      (>>3$taken_br) ? >>3$br_tgt_pc : 
-                     (>>3$is_load) ? >>3$inc_pc : >>1$inc_pc;
+                     (>>3$valid_load) ? >>3$inc_pc : 
+                     (>>3$valid_jump && >>3$is_jal) ? >>3$br_tgt_pc :
+                     (>>3$valid_jump && >>3$is_jalr) ? >>3$jalr_tgt_pc : >>1$inc_pc;
          
          $imem_rd_en = !$reset;
          $imem_rd_addr[31:0] = $pc[M4_IMEM_INDEX_CNT+1:2];
@@ -132,10 +134,12 @@
          $is_sw = $dec_bits ==? 11'bx_010_0100011;
          
          // Jump Instruction
-         $lui = $dec_bits ==? 11'bx_xxx_0110111;
-         $auipc = $dec_bits ==? 11'bx_xxx_0010111;
-         $jal = $dec_bits ==? 11'bx_xxx_1101111;
-         $jalr = $dec_bits ==? 11'bx_000_1100111;
+         $is_lui = $dec_bits ==? 11'bx_xxx_0110111;
+         $is_auipc = $dec_bits ==? 11'bx_xxx_0010111;
+         $is_jal = $dec_bits ==? 11'bx_xxx_1101111;
+         $is_jalr = $dec_bits ==? 11'bx_000_1100111;
+         
+         $is_jump = $is_jal || $is_jalr;
          
       @2   
       // Register File Read
@@ -150,6 +154,9 @@
       // Branch Target PC       
          $br_tgt_pc[31:0] = $pc + $imm;
       
+      // Jump Target PC
+         $jalr_tgt_pc[31:0] = $src1_value + $imm;
+         
       // Input signals to ALU
          $src1_value[31:0] = ((>>1$rd == $rs1) && >>1$rf_wr_en) ? >>1$result : $rf_rd_data1[31:0];
          $src2_value[31:0] = ((>>1$rd == $rs2) && >>1$rf_wr_en) ? >>1$result : $rf_rd_data2[31:0];
@@ -179,10 +186,10 @@
                          $is_sltu ? $sltu_result :
                          $is_srl ? $src1_value >> $src2_value[5:0] :
                          $is_sra ? ({{32{$src1_value[31]}}, $src1_value} >> $src2_value[4:0]) :
-                         $lui ? ({$imm[31:12], 12'b0}) :
-                         $auipc ? $pc + $imm :
-                         $jal ? $pc + 4 :
-                         $jalr ? $pc + 4 : 
+                         $is_lui ? ({$imm[31:12], 12'b0}) :
+                         $is_auipc ? $pc + $imm :
+                         $is_jal ? $pc + 4 :
+                         $is_jalr ? $pc + 4 : 
                          ($is_load || $is_s_instr) ? $src1_value + $imm : 32'bx;
                          
       // Register File Write
@@ -204,9 +211,11 @@
          
       // Load
          $valid_load = $valid && $is_load;
-         $valid = !(>>1$valid_taken_br || >>2$valid_taken_br || >>1$valid_load || >>2$valid_load);
-         
-         
+         $valid = !(>>1$valid_taken_br || >>2$valid_taken_br || >>1$valid_load || >>2$valid_load || >>1$valid_jump || >>2$valid_jump);
+      
+      // Jump
+         $valid_jump = $valid && $is_jump;
+                  
       @4
          $dmem_rd_en = $valid_load;
          $dmem_wr_en = $valid && $is_s_instr;
