@@ -40,6 +40,9 @@
    |cpu
       @0
          $reset = *reset;
+         $start = (>>1$reset&&!$reset) ? 1'b1 : 1'b0;
+         $valid = $reset ? 1'b0 :
+                  $start ? 1'b1 : >>3$valid;
       
       //Fetch
          // Next PC
