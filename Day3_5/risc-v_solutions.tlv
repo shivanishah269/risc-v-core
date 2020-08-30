@@ -47,7 +47,7 @@
       //Fetch
          // Next PC
          $pc[31:0] = (>>1$reset) ? '0 : 
-                     (>>1$taken_br) ? >>1$br_tgt_pc : >>1$pc + 32'd4;
+                     (>>3$taken_br) ? >>3$br_tgt_pc : >>3$pc + 32'd4;
          
          $imem_rd_en = !$reset;
          $imem_rd_addr[31:0] = $pc[M4_IMEM_INDEX_CNT+1:2];
@@ -119,7 +119,7 @@
          $result[31:0] = $is_addi ? $src1_value + $imm :
                          $is_add ? $src1_value + $src2_value : 32'bx;
       // Register File Write
-         $rf_wr_en = ($rd == 5'b0) ? 1'b0 : $rd_valid;
+         $rf_wr_en = $valid ? (($rd == 5'b0) ? 1'b0 : $rd_valid) : 1'b0;     
          ?$rf_wr_en
             $rf_wr_index[4:0] = $rd[4:0];
       
@@ -132,7 +132,8 @@
                      $is_bge ? (($src1_value >= $src2_value) ^ ($src1_value[31] != $src2_value[31])) :
                      $is_bltu ? ($src1_value < $src2_value) :
                      $is_bgeu ? ($src1_value >= $src2_value) : 1'b0;
-         
+                     
+         $valid_taken_br = $valid && $taken_br;
          $br_tgt_pc[31:0] = $pc + $imm;
          
       // Note: Because of the magic we are using for visualisation, if visualisation is enabled below,
