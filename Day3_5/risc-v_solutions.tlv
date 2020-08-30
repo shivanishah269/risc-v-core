@@ -117,8 +117,8 @@
          $br_tgt_pc[31:0] = $pc + $imm;
       
       // Input signals to ALU
-         $src1_value[31:0] = $rf_rd_data1[31:0];
-         $src2_value[31:0] = $rf_rd_data2[31:0];
+         $src1_value[31:0] = ((>>1$rd == $rs1) && >>1$rf_wr_en) ? >>1$result : $rf_rd_data1[31:0];
+         $src2_value[31:0] = ((>>1$rd == $rs2) && >>1$rf_wr_en) ? >>1$result : $rf_rd_data2[31:0];
          
       @3   
          
