@@ -40,21 +40,18 @@
    |cpu
       @0
          $reset = *reset;
-         $start = (>>1$reset&&!$reset) ? 1'b1 : 1'b0;
-         $valid = $reset ? 1'b0 :
-                  $start ? 1'b1 : >>3$valid;
       
       //Fetch
          // Next PC
          $pc[31:0] = (>>1$reset) ? '0 : 
-                     (>>3$taken_br) ? >>3$br_tgt_pc : >>3$pc + 32'd4;
+                     (>>3$taken_br) ? >>3$br_tgt_pc : >>1$inc_pc;
          
          $imem_rd_en = !$reset;
          $imem_rd_addr[31:0] = $pc[M4_IMEM_INDEX_CNT+1:2];
          
       @1         
          $instr[31:0] = $imem_rd_data[31:0];
-         
+         $inc_pc[31:0] = $pc + 32'd4;  
       // Decode   
          $is_i_instr = $instr[6:2] ==? 5'b0000x ||
                        $instr[6:2] ==? 5'b001x0 ||
@@ -141,6 +138,8 @@
                      $is_bgeu ? ($src1_value >= $src2_value) : 1'b0;
                      
          $valid_taken_br = $valid && $taken_br;
+         $valid = !(>>1$valid_taken_br || >>2$valid_taken_br);
+         
          
          
       // Note: Because of the magic we are using for visualisation, if visualisation is enabled below,
