@@ -180,14 +180,15 @@
                          $lui ? ({$imm[31:12], 12'b0}) :
                          $auipc ? $pc + $imm :
                          $jal ? $pc + 4 :
-                         $jalr ? $pc + 4 : 32'bx;
+                         $jalr ? $pc + 4 : 
+                         ($is_load || $is_s_instr) ? $src1_value + $imm : 32'bx;
                          
       // Register File Write
-         $rf_wr_en = $valid ? (($rd == 5'b0) ? 1'b0 : $rd_valid) : 1'b0;     
+         $rf_wr_en = ($rd_valid && $valid && $rd != 5'b0) || >>2$valid_load;
          ?$rf_wr_en
-            $rf_wr_index[4:0] = $rd[4:0];
+            $rf_wr_index[4:0] = !$valid ? >>2$rd[4:0] : $rd[4:0];
       
-         $rf_wr_data[31:0] = $result[31:0];
+         $rf_wr_data[31:0] = !$valid ? >>2$ld_data[31:0] : $result[31:0];
       
       // Branch
          $taken_br = $is_beq ? ($src1_value == $src2_value) :
