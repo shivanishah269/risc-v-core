@@ -23,19 +23,27 @@ This repository contains all the information needed to build your RISC-V pipelin
   - [Load and store instructions and memory](#load-and-store-instructions-and-memory)
   - [Completing the RISC-V CPU](#completing-the-risc-v-cpu)
 - [Contributors](#contributors)
-- [References](#references)
 - [Acknowledgements](#acknowledgements)
 - [Contact Information](#contact-information)
 
 # Introduction to RISC-V ISA 
 
 A RISC-V ISA is defined as a base integer ISA, which must be present in any implementation, plus optional extensions to the base ISA. Each base integer instruction set is characterized by
-  1. Width of the integer registers (HLEN) and 
+  1. Width of the integer registers (XLEN) 
   2. Corresponding size of the address space
-  3. Number of integer registers (32 in RISC-V) 
+  3. Number of integer registers (32 in RISC-V)
+
+More details on RISC-V ISA can be obtained [here](https://github.com/riscv/riscv-isa-manual/releases/download/draft-20200727-8088ba4/riscv-spec.pdf).
 
 # Overview of GNU compiler toolchain
 
+The GNU Toolchain is a set of programming tools in Linux systems that programmers can use to make and compile their code to produce a program or library. So, how the machine code which is understandable by processer is explained below.
+
+  * Preprocessor - Process source code before compilation. Macro definition, file inclusion or any other directive if present then are preprocessed. 
+  * Compiler - Takes the input provided by preprocessor and converts to assembly code.
+  * Assembler - Takes the input provided by compiler and converts to relocatable machine code.
+  * Linker - Takes the input provided by Assembler and converts to Absolute machine code.
+  
 # Introduction to ABI
 
 # Digital Logic with TL-Verilog and Makerchip
@@ -71,10 +79,6 @@ A RISC-V ISA is defined as a base integer ISA, which must be present in any impl
 ## Completing the RISC-V CPU
 
 # Contributors
-
-# References
-
-* [RISC-V ISA specification](https://github.com/riscv/riscv-isa-manual/releases/download/draft-20200727-8088ba4/riscv-spec.pdf)
 
 # Acknowledgements
 
