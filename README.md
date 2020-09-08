@@ -158,14 +158,59 @@ Below is snapshot from Makerchip IDE after including the control logic for branc
 
 # Pipelined RISC-V CPU
 
+Converting non-piepleined CPU to pipelined CPU using timing abstract feature of TL-Verilog. This allows easy retiming wihtout any risk of funcational bugs. More details reagrding Timing Abstract in TL-Verilog can be found in IEEE Paper ["Timing-Abstract Circuit Design in Transaction-Level Verilog" by Steven Hoover.](https://ieeexplore.ieee.org/document/8119264)
+
 ## Pipelining the CPU
+
+Pipelining the CPU with branches still having 3 cycle delay rest all instructions are pipelined. Pipelining the CPU in TL-Verilog can be done in following manner:
+```
+|<pipe-name>
+    @<pipe stage>
+       Instructions present in this stage
+       
+    @<pipe_stage>
+       Instructions present in this stage
+       
+```
+
+Below is snapshot of pipelined CPU with a test case of assembly program which does summation from 1 to 9 then stores to r10 of register file. In snapshot `r10 = 45`. Test case:
+```
+*passed = |cpu/xreg[10]>>5$value == (1+2+3+4+5+6+7+8+9);
+```
 
 ## Load and store instructions and memory
 
+Similar to branch, load will also have 3 cycle delay. So, added a Data Memory 1 write/read memory.
+
+Inputs:
+  * Read_Enable - Enable signal to perform read operation
+  * Write_Enable - Enable signal to perform write operation
+  * Address - Address specified whether to read/write from
+  * Write_Data - Data to be written on Address (Store Instruction)
+
+Output: 
+  * Read_Data - Data to be read from Address (Load Instruction)
+
+Added test case to check fucntionality of load/store. Stored the summation of 1 to 9 on address 4 of Data Memory and loaded that value from Data Memory to r17.
+```
+*passed = |cpu/xreg[17]>>5$value == (1+2+3+4+5+6+7+8+9);
+```
+Below is snapshot from Makerchip IDE after including load/store instructions.
+
 ## Completing the RISC-V CPU
+
+Added Jumps and completed Instruction Decode and ALU for all instruction present in RV32I base integer instruction set.
+
+Below is final Snapshot of Complete Pipelined RISC-V CPU.
 
 # Contributors
 
 # Acknowledgements
+- [Kunal Ghosh](https://github.com/kunalg123), Co-founder, VSD Corp. Pvt. Ltd.
+- [Steve Hoover](https://github.com/stevehoover), Founder, Redwood EDA
+- [Shivam Potdar](https://github.com/shivampotdar), GSoC 2020 @fossi-foundation
+- [Vineet Jain](https://github.com/vineetjain07), GSoC 2020 @fossi-foundation
+
 
 # Contact Information
+
