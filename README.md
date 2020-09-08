@@ -13,9 +13,8 @@ This repository contains all the information needed to build your RISC-V pipelin
 - [Basic RISC-V CPU micro-architecture](#basic-risc-v-cpu-micro-architecture)
   - [Fetch](#fetch)
   - [Decode](#decode)
-  - [Register File Read](#register-file-read)
+  - [Register File Read/Write](#register-file-read-/-write)
   - [Execute](#execute)
-  - [Register File Write](#register-file-write)
   - [Control Logic](#control-logic)
 - [Pipelined RISC-V CPU](#pipelined-risc-v-cpu)
   - [Pipelinig the CPU](#pipelining-the-cpu)
@@ -72,6 +71,8 @@ An Application Binary Interface is a set of rules enforced by the Operating Syst
 
 # Digital Logic with TL-Verilog and Makerchip
 
+[Makerchip](https://makerchip.com/) is a free online environment for developing high-quality integrated circuits. You can code, compile, simulate, and debug Verilog designs, all from your browser. Your code, block diagrams, and waveforms are tightly integrated.
+
 All the examples shown below are done on Makerchip IDE using TL-verilog. Also there are other tutorials present on IDE which can be found [here](https://makerchip.com/sandbox/) under Tutorials section.
 
 ## Combinational logic
@@ -100,17 +101,60 @@ Below is snapshot of 2-cycle calculator with validity.
 
 # Basic RISC-V CPU micro-architecture
 
+Designing the basic processor of 3 stages fetch, decode and execute based on RISC-V ISA.
+
 ## Fetch
+
+Program Counter (PC): Holds the address of next Instruction
+Instruction Memory (IM): Holds the set of instructions to be executed
+
+During Fetch Stage, processor fetches the instruction from the IM pointed by address given by PC.
+
+Below is snapshot from Makerchip IDE after performing the Fetch Stage.
 
 ## Decode
 
-## Register File Read
+6 types of Instructions:
+  * R-type - Register 
+  * I-type - Immediate
+  * S-type - Store
+  * B-type - Branch (Conditional Jump)
+  * U-type - Upper Immediate
+  * J-type - Jump (Unconditional Jump)
+
+Instruction Format includes Opcode, immediate value, source address, destination address. During Decode Stage, processor decodes the instruction based on instruction format and type of instruction.
+
+Below is snapshot from Makerchip IDE after performing the Decode Stage.
+
+## Register File Read/Write
+
+Here the Register file is 2 read, 1 write means 2 read and 1 write operation can happen simultanously.
+
+Inputs:
+  * Read_Enable   - Enable signal to perform read operation
+  * Read_Address1 - Address1 from where data has to be read 
+  * Read_Address2 - Address2 from where data has to be read 
+  * Write_Enable  - Enable signal to perform write operation
+  * Write_Address - Address where data has to be written
+  * Write_Data    - Data to be written at Write_Address
+
+Outputs:
+  * Read_Data1    - Data from Read_Address1
+  * Read_Data2    - Data from Read_Address2
+
+Below is snapshot from Makerchip IDE after performing the Register File Read/Write.
 
 ## Execute
 
-## Register File Write
+During the Execute Stage, both the operands perform the operation based on Opcode.
+
+Below is snapshot from Makerchip IDE after performing the Execute Stage.
 
 ## Control Logic
+
+During Decode Stage, branch target address is calculated and fed into PC mux. Before Execute Stage, once the operands are ready branch condition is checked.
+
+Below is snapshot from Makerchip IDE after including the control logic for branch instructions.
 
 # Pipelined RISC-V CPU
 
