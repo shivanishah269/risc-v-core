@@ -105,8 +105,8 @@ Designing the basic processor of 3 stages fetch, decode and execute based on RIS
 
 ## Fetch
 
-Program Counter (PC): Holds the address of next Instruction
-Instruction Memory (IM): Holds the set of instructions to be executed
+* Program Counter (PC): Holds the address of next Instruction
+* Instruction Memory (IM): Holds the set of instructions to be executed
 
 During Fetch Stage, processor fetches the instruction from the IM pointed by address given by PC.
 
