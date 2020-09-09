@@ -75,29 +75,37 @@ An Application Binary Interface is a set of rules enforced by the Operating Syst
 
 All the examples shown below are done on Makerchip IDE using TL-verilog. Also there are other tutorials present on IDE which can be found [here](https://makerchip.com/sandbox/) under Tutorials section.
 
-## Combinational logic
+## [Combinational logic](codes/Combinational_Calculator.tlv)
 
 Starting with basic example in combinational logic is an inverter. To write the logic of inverter using TL-verilog is `$out = ! $in;`. There is no need to declare `$out` and `$in` unlike Verilog. There is also no need to assign `$in`. Random stimulus is provided, and a warning is produced. 
 
 Below is snapshot of Combinational Calculator.
 
-## Sequential logic
+![image](Images/Combinational_Calculator.png)
+
+## [Sequential logic](codes/Sequential_Calculator.tlv)
 
 Starting with basic example in sequential logic is Fibonacci Series with reset. To write the logic of Series using TL-Verilog is `$num[31:0] = $reset ? 1 : (>>1$num + >>2$num)`. This operator `>>?` is ahead of operator which will provide the value of that signal 1 cycle before and 2 cycle before respectively.
 
 Below is snapshot of Sequential Calculator which remembers the last result, and uses it for the next calculation.
 
-## Pipelined logic
+![image](Images/Sequential_Calculator.png)
+
+## [Pipelined logic](codes/Cycle_Calculator.tlv)
 
 Timing abstract powerful feature of TL-Verilog which converts a code into pipeline stages easily. Whole code under `|pipe` scope with stages defined as `@?`
 
 Below is snapshot of 2-cycle calculator which clears the output alternatively and output of given inputs are observed at the next cycle.
 
-## Validity
+![image](Images/Cycle_Calculator.png)
+
+## [Validity](codes/Cycle_Calculator_Validity.tlv)
 
 Validity is TL-verilog means signal indicates validity of transaction and described as "when" scope else it will work as don't care. Denoted as `?$valid`. Validity provides easier debug, cleaner design, better error checking, automated clock gating.
 
 Below is snapshot of 2-cycle calculator with validity. 
+
+![image](Images/Cycle_Calculator_validity.png)
 
 # Basic RISC-V CPU micro-architecture
 
