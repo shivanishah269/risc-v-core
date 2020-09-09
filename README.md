@@ -81,7 +81,7 @@ Starting with basic example in combinational logic is an inverter. To write the 
 
 Below is snapshot of Combinational Calculator.
 
-![Combinational-Calculator](Images/Combinational_Calculator.png "Combinational Calculator")
+![Combinational-Calculator](Images/Combinational_Calculator.png)
 
 ## [Sequential logic](codes/Sequential_Calculator.tlv)
 
@@ -200,7 +200,7 @@ Below is snapshot of pipelined CPU with a test case of assembly program which do
 
 ```
 
-![Pipelining_CPU](Images/Pipelining_CPU.png)
+![Pipelining_CPU](Images/Pipelining the CPU.png)
 
 ## [Load and store instructions and memory](codes/Load_Store.tlv)
 
@@ -221,7 +221,7 @@ Added test case to check fucntionality of load/store. Stored the summation of 1 
 ```
 Below is snapshot from Makerchip IDE after including load/store instructions.
 
-![Load_Store](Load_Store.png)
+![Load_Store](Images/Load_Store.png)
 
 ## [Completing the RISC-V CPU](codes/Final.tlv)
 
@@ -229,7 +229,7 @@ Added Jumps and completed Instruction Decode and ALU for all instruction present
 
 Below is final Snapshot of Complete Pipelined RISC-V CPU.
 
-![Final](Final.png)
+![Final](Images/Final.png)
 
 # Contributors
 
