@@ -181,7 +181,7 @@ Below is snapshot from Makerchip IDE after including the control logic for branc
 
 Converting non-piepleined CPU to pipelined CPU using timing abstract feature of TL-Verilog. This allows easy retiming wihtout any risk of funcational bugs. More details reagrding Timing Abstract in TL-Verilog can be found in IEEE Paper ["Timing-Abstract Circuit Design in Transaction-Level Verilog" by Steven Hoover.](https://ieeexplore.ieee.org/document/8119264)
 
-## Pipelining the CPU
+## [Pipelining the CPU](codes/Pipelining_the_CPU.tlv)
 
 Pipelining the CPU with branches still having 3 cycle delay rest all instructions are pipelined. Pipelining the CPU in TL-Verilog can be done in following manner:
 ```
@@ -197,9 +197,12 @@ Pipelining the CPU with branches still having 3 cycle delay rest all instruction
 Below is snapshot of pipelined CPU with a test case of assembly program which does summation from 1 to 9 then stores to r10 of register file. In snapshot `r10 = 45`. Test case:
 ```
 *passed = |cpu/xreg[10]>>5$value == (1+2+3+4+5+6+7+8+9);
+
 ```
 
-## Load and store instructions and memory
+![Pipelining_CPU](Images/Pipelining_CPU.png)
+
+## [Load and store instructions and memory](codes/Load_Store.tlv)
 
 Similar to branch, load will also have 3 cycle delay. So, added a Data Memory 1 write/read memory.
 
@@ -218,11 +221,15 @@ Added test case to check fucntionality of load/store. Stored the summation of 1 
 ```
 Below is snapshot from Makerchip IDE after including load/store instructions.
 
-## Completing the RISC-V CPU
+![Load_Store](Load_Store.png)
+
+## [Completing the RISC-V CPU](codes/Final.tlv)
 
 Added Jumps and completed Instruction Decode and ALU for all instruction present in RV32I base integer instruction set.
 
 Below is final Snapshot of Complete Pipelined RISC-V CPU.
+
+![Final](Final.png)
 
 # Contributors
 
