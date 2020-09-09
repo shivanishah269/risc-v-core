@@ -200,7 +200,7 @@ Below is snapshot of pipelined CPU with a test case of assembly program which do
 
 ```
 
-![Pipelining_CPU](Images/Pipelining the CPU.png)
+![Pipelining_CPU](Images/Pipelining_CPU.png)
 
 ## [Load and store instructions and memory](codes/Load_Store.tlv)
 
