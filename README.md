@@ -13,7 +13,7 @@ This repository contains all the information needed to build your RISC-V pipelin
 - [Basic RISC-V CPU micro-architecture](#basic-risc-v-cpu-micro-architecture)
   - [Fetch](#fetch)
   - [Decode](#decode)
-  - [Register File Read/Write](#register-file-read-/-write)
+  - [Register File Read and Write](#register-file-read-and-write)
   - [Execute](#execute)
   - [Control Logic](#control-logic)
 - [Pipelined RISC-V CPU](#pipelined-risc-v-cpu)
@@ -81,7 +81,7 @@ Starting with basic example in combinational logic is an inverter. To write the 
 
 Below is snapshot of Combinational Calculator.
 
-![image](Images/Combinational_Calculator.png)
+![Combinational-Calculator](Images/Combinational_Calculator.png "Combinational Calculator")
 
 ## [Sequential logic](codes/Sequential_Calculator.tlv)
 
@@ -89,7 +89,7 @@ Starting with basic example in sequential logic is Fibonacci Series with reset. 
 
 Below is snapshot of Sequential Calculator which remembers the last result, and uses it for the next calculation.
 
-![image](Images/Sequential_Calculator.png)
+![Sequential-Calculator](Images/Sequential_Calculator.png)
 
 ## [Pipelined logic](codes/Cycle_Calculator.tlv)
 
@@ -97,7 +97,7 @@ Timing abstract powerful feature of TL-Verilog which converts a code into pipeli
 
 Below is snapshot of 2-cycle calculator which clears the output alternatively and output of given inputs are observed at the next cycle.
 
-![image](Images/Cycle_Calculator.png)
+![Cycle-Calculator](Images/Cycle_Calculator.png)
 
 ## [Validity](codes/Cycle_Calculator_Validity.tlv)
 
@@ -105,13 +105,13 @@ Validity is TL-verilog means signal indicates validity of transaction and descri
 
 Below is snapshot of 2-cycle calculator with validity. 
 
-![image](Images/Cycle_Calculator_validity.png)
+![Cycle-Calculator-Validity](Images/Cycle_Calculator_validity.png)
 
 # Basic RISC-V CPU micro-architecture
 
 Designing the basic processor of 3 stages fetch, decode and execute based on RISC-V ISA.
 
-## Fetch
+## [Fetch](codes/Fetch.tlv)
 
 * Program Counter (PC): Holds the address of next Instruction
 * Instruction Memory (IM): Holds the set of instructions to be executed
@@ -120,7 +120,9 @@ During Fetch Stage, processor fetches the instruction from the IM pointed by add
 
 Below is snapshot from Makerchip IDE after performing the Fetch Stage.
 
-## Decode
+![Fetch](Images/Fetch.png)
+
+## [Decode](codes/Decode.tlv)
 
 6 types of Instructions:
   * R-type - Register 
@@ -134,7 +136,9 @@ Instruction Format includes Opcode, immediate value, source address, destination
 
 Below is snapshot from Makerchip IDE after performing the Decode Stage.
 
-## Register File Read/Write
+![Decode](Images/Decode.png)
+
+## [Register File Read and Write](codes/Register_File_Read.tlv)
 
 Here the Register file is 2 read, 1 write means 2 read and 1 write operation can happen simultanously.
 
@@ -150,19 +154,28 @@ Outputs:
   * Read_Data1    - Data from Read_Address1
   * Read_Data2    - Data from Read_Address2
 
-Below is snapshot from Makerchip IDE after performing the Register File Read/Write.
+Below is snapshot from Makerchip IDE after performing the Register File Read followed by Register File Write.
 
-## Execute
+![Register-File-Read](Images/Register_File_Read.png)
+
+![Register-File-Write](Images/Register_File_Write.png)
+
+
+## [Execute](codes/ALU.tlv)
 
 During the Execute Stage, both the operands perform the operation based on Opcode.
 
 Below is snapshot from Makerchip IDE after performing the Execute Stage.
 
-## Control Logic
+![Execute](Images/ALU.png)
+
+## [Control Logic](codes/Branches.tlv)
 
 During Decode Stage, branch target address is calculated and fed into PC mux. Before Execute Stage, once the operands are ready branch condition is checked.
 
 Below is snapshot from Makerchip IDE after including the control logic for branch instructions.
+
+![Control-logic](Images/Control_Logic.png)
 
 # Pipelined RISC-V CPU
 
