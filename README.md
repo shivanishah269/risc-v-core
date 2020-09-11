@@ -70,17 +70,17 @@ Under the risc-v toolchain,
       1. [RISC-V GNU Toolchain](http://hdlexpress.com/RisKy1/How2/toolchain/toolchain.html)
       2. [RISC-V ISA SImulator - Spike](https://github.com/kunalg123/riscv_workshop_collaterals)
 
-Test Case for the above commands [(Summation of 1 to 9)](codes/sum1ton.c)
+Test Case for the above commands [(Summation of 1 to 9)](codes/sum1ton.c),
 
-Below image shows the disassembled file `sum1ton.o` with `main` function highlighted.
+  * Below image shows the disassembled file `sum1ton.o` with `main` function highlighted.
 
-![disassemble](Images/disassemble.png)
+    ![disassemble](Images/disassemble.png)
 
-To view the registers we can use command as `reg <core> <register name>`. 
+  * To view the registers we can use command as `reg <core> <register name>`. 
 
-Below image shows how to debug the disassembled file using Spike simulator where a1,a2 register are checked before and after the instructions got executed.
+    Below image shows how to debug the disassembled file using Spike simulator where a1,a2 register are checked before and after the instructions got executed.
 
-![spike_debug](Images/spike_debug.png)
+    ![spike_debug](Images/spike_debug.png)
 
 # Introduction to ABI
 
@@ -91,19 +91,19 @@ So, it is system call interface used by the application program to access the re
 
 ![calling_convention](Images/calling_convetion.png)
 
-Test Case for ABI Call: [Summation of 1 to 9](codes/1to9_custom.c) through [assembly code](codes/load.S)
+Test Case for ABI Call: [Summation of 1 to 9](codes/1to9_custom.c) through [assembly code](codes/load.S),
 
-Below image shows the `main` function.
+  * Below image shows the `main` function.
 
-![main_ABI](Images/main_ABI.png)
+    ![main_ABI](Images/main_ABI.png)
 
-Below image shows 2 sections from [load.S](codes/load.S) (one is load and other is loop).
+  * Below image shows 2 sections from [load.S](codes/load.S) (one is load and other is loop).
 
-![load_ABI](Images/load_ABI.png)
+    ![load_ABI](Images/load_ABI.png)
 
-Below image shows the output of Summation from 1 to 9.
+  * Below image shows the output of Summation from 1 to 9.
 
-![compile_ABI](Images/compile_ABI.png)
+    ![compile_ABI](Images/compile_ABI.png)
 
 # Digital Logic with TL-Verilog and Makerchip
 
