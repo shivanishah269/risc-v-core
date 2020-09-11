@@ -4,7 +4,8 @@ This repository contains all the information needed to build your RISC-V pipelin
 
 # Table of Contents
 - [Introduction to RISC-V ISA](#introduction-to-risc-v-isa)
-- [Overview of GNU compiler toolchain and Introduction to ABI](#overview-of-gnu-compiler-toolchain-and-introduction-to-abi)
+- [Overview of GNU compiler toolchain](#overview-of-gnu-compiler-toolchain)
+- [Introduction to ABI](#introduction-to-abi)
 - [Digital Logic with TL-Verilog and Makerchip](#digital-logic-with-tl-verilog-and-makerchip)
   - [Combinational logic](#combinational-logic)
   - [Sequential logic](#sequential-logic)
@@ -33,7 +34,7 @@ A RISC-V ISA is defined as a base integer ISA, which must be present in any impl
 
 More details on RISC-V ISA can be obtained [here](https://github.com/riscv/riscv-isa-manual/releases/download/draft-20200727-8088ba4/riscv-spec.pdf).
 
-# Overview of GNU compiler toolchain and Introduction to ABI
+# Overview of GNU compiler toolchain
 
 The GNU Toolchain is a set of programming tools in Linux systems that programmers can use to make and compile their code to produce a program or library. So, how the machine code which is understandable by processer is explained below.
 
@@ -65,9 +66,44 @@ Under the risc-v toolchain,
     
     `spike -d pk <object Filename>` with degub command as `until pc 0 <pc of your choice>`
 
-    To install complete risc-v toolchain locally go to [this](https://github.com/kunalg123/riscv_workshop_collaterals) github repository and run the `run.sh` file.
+    To install complete risc-v toolchain locally,
+      1. [RISC-V GNU Toolchain](http://hdlexpress.com/RisKy1/How2/toolchain/toolchain.html)
+      2. [RISC-V ISA SImulator - Spike](https://github.com/kunalg123/riscv_workshop_collaterals)
+
+Test Case for the above commands [(Summation of 1 to 9)](codes/sum1ton.c)
+
+Below image shows the disassembled file `sum1ton.o` with `main` function highlighted.
+
+![disassemble](Images/disassemble.png)
+
+To view the registers we can use command as `reg <core> <register name>`. 
+
+Below image shows how to debug the disassembled file using Spike simulator where a1,a2 register are checked before and after the instructions got executed.
+
+![spike_debug](Images/spike_debug.png)
+
+# Introduction to ABI
 
 An Application Binary Interface is a set of rules enforced by the Operating System on a specific architecture. So, Linker converts relocatable machine code to absolute machine code via ABI interface specific to the architecture of machine.
+
+So, it is system call interface used by the application program to access the registers specific to architecture. Overhere the architecture is RISC-V, so to access 32 registers of RISC-V below is the table which shows the calling convention (ABI name) given to registers for the application programmer to use.
+[(Image source)](https://riscv.org/wp-content/uploads/2015/01/riscv-calling.pdf)
+
+![calling_convention](Images/calling_convetion.png)
+
+Test Case for ABI Call: [Summation of 1 to 9](codes/1to9_custom.c) through [assembly code](codes/load.S)
+
+Below image shows the `main` function.
+
+![main_ABI](Images/main_ABI.png)
+
+Below image shows 2 sections from [load.S](codes/load.S) (one is load and other is loop).
+
+![load_ABI](Images/load_ABI.png)
+
+Below image shows the output of Summation from 1 to 9.
+
+![compile_ABI](Images/compile_ABI.png)
 
 # Digital Logic with TL-Verilog and Makerchip
 
