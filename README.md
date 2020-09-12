@@ -64,9 +64,11 @@ Under the risc-v toolchain,
     
     `spike -d pk <object Filename>` with degub command as `until pc 0 <pc of your choice>`
 
-    To install complete risc-v toolchain locally,
+    To install complete risc-v toolchain locally on linux machine,
       1. [RISC-V GNU Toolchain](http://hdlexpress.com/RisKy1/How2/toolchain/toolchain.html)
       2. [RISC-V ISA SImulator - Spike](https://github.com/kunalg123/riscv_workshop_collaterals)
+    
+    Once done with installation add the PATH to .bashrc file for future use.
 
 Test Case for the above commands [(Summation of 1 to 9)](codes/sum1ton.c),
 
