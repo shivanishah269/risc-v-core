@@ -188,8 +188,8 @@
                          $is_sra ? ({{32{$src1_value[31]}}, $src1_value} >> $src2_value[4:0]) :
                          $is_lui ? ({$imm[31:12], 12'b0}) :
                          $is_auipc ? $pc + $imm :
-                         $is_jal ? $pc + 4 :
-                         $is_jalr ? $pc + 4 : 
+                         $is_jal ? $pc + $imm :
+                         $is_jalr ? $pc + $imm : 
                          ($is_load || $is_s_instr) ? $src1_value + $imm : 32'bx;
                          
       // Register File Write
