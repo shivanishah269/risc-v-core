@@ -1,6 +1,6 @@
 \m4_TLV_version 1d -p verilog --bestsv: tl-x.org
 \SV
-    m4_include_lib(['https://gist.githubusercontent.com/shivanishah269/a34f039ba93334a2450ee6b191d6757f/raw/7fb2c326a27a7e9deb0f5369b34e981dea13d1aa/gistfile1.txt'])
+    m4_include_lib(['https://raw.githubusercontent.com/shivanishah269/risc-v-core/master/FPGA%20Implementation/riscv_shell_lib.tlv'])
    // <Your permissive open-source license here>
 
    // A starting template/example for developing a Verilog/SystemVerilog module within Makerchip, using a Verilog testbench.
