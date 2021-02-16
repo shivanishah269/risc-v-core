@@ -29,7 +29,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 // File included by SandPiper-generated code for the default project configuration.
-`include "/home/shivani/Documents/self_study/test/out/sandpiper.vh"
+`include "sandpiper.vh"
 
 
 // Latch macros.  Inject 'x in simulation for clk === 'x.
