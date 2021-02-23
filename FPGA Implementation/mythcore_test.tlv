@@ -1,4 +1,4 @@
-\m4_TLV_version 1d -p verilog --bestsv --noline: tl-x.org
+\m4_TLV_version 1d --bestsv --noline: tl-x.org
 \SV
     m4_include_lib(['https://gist.githubusercontent.com/shivanishah269/a34f039ba93334a2450ee6b191d6757f/raw/5b0f92bef3ab4dea5dcad149495c003ec2084534/gistfile1.txt'])
    
