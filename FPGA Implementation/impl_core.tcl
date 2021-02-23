@@ -4,13 +4,13 @@
 #STEP#0: define your customized top file 
 #
 set design mythcore_test
-set cons ./mythcore_constraints.xdc
+set cons ./constraints.xdc
 
 
 #
 # STEP#1: define output directory area.
 #
-set outputDir ./out/FPGA
+set outputDir ./out/FPGA_core
 file mkdir $outputDir
 
 #
