@@ -18,7 +18,7 @@ m4+definitions(['
    @_stage
       \SV_plus
          // The program in an instruction memory.
-         wire [31:0] instrs [0:M4_NUM_INSTRS-1];
+         logic [31:0] instrs [0:M4_NUM_INSTRS-1];
          m4_forloop(['m4_instr_ind'], 0, M4_NUM_INSTRS, ['assign instrs[m4_echo(m4_instr_ind)] = m4_echo(['m4_instr']m4_instr_ind; ['']m4_new_line               )'])  
       /M4_IMEM_HIER
          $instr[31:0] = *instrs\[#imem\];
