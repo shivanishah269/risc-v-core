@@ -16,7 +16,7 @@ file mkdir $outputDir
 #
 # STEP#2: setup design sources and constraints
 #
-read_verilog ./out/$design.sv
+read_verilog -sv ./out/$design.sv
 read_verilog ./includes/clk_gate.v
 read_verilog -sv ./includes/pseudo_rand.sv
 set_property include_dirs {./includes ./} [current_fileset]
