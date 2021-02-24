@@ -1,7 +1,5 @@
 \m4_TLV_version 1d --bestsv --noline: tl-x.org
 \SV
-    m4_include_lib(['https://gist.githubusercontent.com/shivanishah269/a34f039ba93334a2450ee6b191d6757f/raw/48a176d1b60a0975367676b19242fd5849e27bbd/gistfile1.txt'])
-   
    m4_makerchip_module   // Compile within Makerchip to see expanded module definition.
       logic [7:0] out;          // Connect to LEDs.      
       
