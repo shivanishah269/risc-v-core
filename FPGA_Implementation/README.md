@@ -30,7 +30,7 @@ Run `./run.sh` file by changing tlv and tcl file name as [counter.tlv](counter.t
    `makerchip --from_url 'https://gitlab.com/rweda/makerchip-app/-/raw/master/starting_templates/makerchip_default.tlv' design.tlv`  
    Or     
    If you are focusing on FPGA tool flow, then you can start with:  
-   `makerchip --from_url 'https://github.com/shivanishah269/risc-v-core/blob/master/FPGA_Implementation/template.tlv' design.tlv`
+   `makerchip --from_url 'https://gist.githubusercontent.com/shivanishah269/94c5800f24f6c6a38d7256219cc792c5/raw/7bf1aefaa510d85290ceb3cb131e6ee81f8de9f2/gistfile1.txt' design.tlv`
 2. Connect to I/Os of Zedboard through [`constraints.xdc`](constraints.xdc)
 3. Create the `.tcl` file for your project and change the [`run.sh`](run.sh) with respective tlv and tcl files.
 4. Execute `./run.sh`
