@@ -1,9 +1,9 @@
 # FPGA Implementation of MYTH Core using TL-Verilog
 
-This section of the repository contains all files needed to implement the core on FPGA.
+This section of the repository contains all files needed to implement the core on FPGA. Also, I have added the counter example to run on FPGA.
 
-## Overview of [SandPiper](https://www.redwoodeda.com/products)
-* SandPiper is a code generator that generates readable, well-structured, Verilog or SystemVerilog code from the given TL-Verilog code.
+## Overview of SandPiper
+* [SandPiper](https://www.redwoodeda.com/products) is a code generator that generates readable, well-structured, Verilog or SystemVerilog code from the given TL-Verilog code.
 * [SandPiper SaaS Edition](https://www.redwoodeda.com/sandpiper-saas) runs as a microservice in the cloud to support easy open-source development. No installation is required. 
 * To run locally, SandPiper Education Edition can be requested from [RedwoodEDA](https://www.redwoodeda.com/products)
 
@@ -30,7 +30,11 @@ Run `./run.sh` file by changing tlv and tcl file name as [counter.tlv](counter.t
    `makerchip --from_url 'https://gitlab.com/rweda/makerchip-app/-/raw/master/starting_templates/makerchip_default.tlv' design.tlv`  
    Or     
    If you are focusing on FPGA tool flow, then you can start with:  
-   `makerchip --from_url 'template.tlv' design.tlv`
+   `makerchip --from_url 'https://github.com/shivanishah269/risc-v-core/blob/master/FPGA_Implementation/template.tlv' design.tlv`
 2. Connect to I/Os of Zedboard through [`constraints.xdc`](constraints.xdc)
 3. Create the `.tcl` file for your project and change the [`run.sh`](run.sh) with respective tlv and tcl files.
 4. Execute `./run.sh`
+
+## Note
+
+Currently, SandPiper generates System Verilog code. If you want to work with Verilog code, just add `-p verilog` to first line of your tlv file. For eg, `\m4_TLV_version 1d -p verilog --bestsv --noline: tl-x.org`
