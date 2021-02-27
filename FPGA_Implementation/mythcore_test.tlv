@@ -1,6 +1,6 @@
 \m4_TLV_version 1d --bestsv --noline: tl-x.org
 \SV
-    m4_include_lib(['https://github.com/shivanishah269/risc-v-core/blob/master/FPGA_Implementation/riscv_shell_lib.tlv'])
+    m4_include_lib(['https://raw.githubusercontent.com/shivanishah269/risc-v-core/master/FPGA_Implementation/riscv_shell_lib.tlv'])
    
    module core(input clk, input reset, output reg [7:0] out);
 \TLV
