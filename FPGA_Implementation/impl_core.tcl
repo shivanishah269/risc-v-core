@@ -99,7 +99,7 @@ puts [lindex $theWords 4]
 open_hw
 connect_hw_server
 open_hw_target
-set_property PROGRAM.FILE {/home/shivani/Documents/self_study/test_flow/out/FPGA/mythcore_test.bit} [current_hw_device]
+set_property PROGRAM.FILE {./out/FPGA_core/mythcore_test.bit} [current_hw_device]
 program_hw_device
 
 exit
