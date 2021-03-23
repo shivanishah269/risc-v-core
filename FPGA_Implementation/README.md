@@ -20,7 +20,7 @@ The FPGA board I have used here is [Zedboard](http://zedboard.org/product/zedboa
 You can edit/test the [counter](counter.tlv) code on [makerchip-app](https://pypi.org/project/makerchip-app/) which is virtual desktop application of [makerchip](http://makerchip.com/) platform.
 
 Install: `pip3 install makerchip-app`   
-Run: `makerhip counter.tlv`
+Run: `makerchip counter.tlv`
 
 Run `./run.sh` file by changing tlv and tcl file name as [counter.tlv](counter.tlv) and [impl_counter.tcl](impl_counter.tcl).
 
