@@ -3,7 +3,7 @@
     // Included URL: "https://raw.githubusercontent.com/shivanishah269/risc-v-core/master/FPGA_Implementation/riscv_shell_lib.tlv"// Included URL: "https://raw.githubusercontent.com/stevehoover/warp-v_includes/2d6d36baa4d2bc62321f982f78c8fe1456641a43/risc-v_defs.tlv"
    
    module core(input clk, input reset, output reg [7:0] out);
-`include "mythcore_test_gen.sv"
+`include "mythcore_test_gen.v"
 generate //_\TLV
 // /====================\
    // | Sum 1 to 9 Program |
@@ -236,7 +236,7 @@ generate //_\TLV
    // Assert these to end simulation (before Makerchip cycle limit).
    /*SV_plus*/
       always @ (posedge clk) begin
-         if (CPU_Xreg_value_a5[17] ==? (1+2+3+4+5+6+7+8+9))
+         if (CPU_Xreg_value_a5[17] == (1+2+3+4+5+6+7+8+9))
             out = CPU_Xreg_value_a5[17];                
       end
    
@@ -251,7 +251,7 @@ generate //_\TLV
          //_@1
             /*SV_plus*/
                // The program in an instruction memory.
-               logic [31:0] instrs [0:10-1];
+               wire [31:0] instrs [0:10-1];
                assign instrs[0] = {7'b0000000, 5'd0, 5'd0, 3'b000, 5'd10, 7'b0110011}; 
                assign instrs[1] = {7'b0000000, 5'd0, 5'd10, 3'b000, 5'd14, 7'b0110011}; 
                assign instrs[2] = {12'b1010, 5'd10, 3'b000, 5'd12, 7'b0010011}; 
