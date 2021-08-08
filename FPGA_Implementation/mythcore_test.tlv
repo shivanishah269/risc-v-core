@@ -42,7 +42,7 @@
       //Fetch
          // Next PC
          $pc[31:0] = (>>1$reset) ? '0 : 
-                     (>>3$taken_br) ? >>3$br_tgt_pc : 
+                     (>>3$valid_taken_br) ? >>3$br_tgt_pc : 
                      (>>3$valid_load) ? >>3$inc_pc : 
                      (>>3$valid_jump && >>3$is_jal) ? >>3$br_tgt_pc :
                      (>>3$valid_jump && >>3$is_jalr) ? >>3$jalr_tgt_pc : >>1$inc_pc;
